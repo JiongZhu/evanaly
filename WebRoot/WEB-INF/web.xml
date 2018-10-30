@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	<!-- web监听器，用来初始化WebApplication -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring-context*.xml</param-value>
+	</context-param>
+	<!--spring-mvc servlet  -->
+	<servlet>
+		<servlet-name>springMVC</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring-mvc.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springMVC</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<filter>
+		<filter-name>rememberFilter</filter-name>
+		<filter-class>com.filter.RemeberFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>rememberFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>loginFilter</filter-name>
+		<filter-class>com.filter.LoginFilter</filter-class>
+		<init-param>
+			<param-name>includePage</param-name><!-- 只对指定过滤参数后缀进行过滤 -->
+			<param-value>user/changeps.jsp;user/manageevent.jsp;user/manageperson.jsp;user/manageweather.jsp;user/info.jsp</param-value>
+		</init-param>
+		<init-param>
+			<param-name>redirectPath</param-name><!-- 未通过跳转到登录界面 -->
+			<param-value>/login.jsp</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>loginFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>authorityFilter</filter-name>
+		<filter-class>com.filter.AuthorityFilter</filter-class>
+		<init-param>
+			<param-name>includePage</param-name><!-- 只对指定过滤参数后缀进行过滤 -->
+			<param-value>user/manageevent.jsp;user/manageperson.jsp;user/manageweather.jsp</param-value>
+		</init-param>
+		<init-param>
+			<param-name>redirectPath</param-name><!-- 未通过跳转到登录界面 -->
+			<param-value>/authorityerror.jsp</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>authorityFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+
+	<!-- spring编码处理器 -->
+	<filter>
+		<filter-name>characterEncoding</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>characterEncoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 设置servlet 过滤器 -->
+	<filter>
+		<filter-name>myFilter</filter-name>
+		<filter-class>com.filter.ServletFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>myFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+</web-app>

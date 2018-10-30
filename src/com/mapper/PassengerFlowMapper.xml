@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.DAO.PassengerFlowDAO">
+	<cache/>
+	<resultMap type="PassengerFlow" id="passengerFlow">
+		<id column="pf_id" property="id" jdbcType="INTEGER" />
+		<result column="pf_date" property="date" jdbcType="DATE" />
+		<result column="pf_showPnums" property="showPnums" jdbcType="INTEGER" />
+		<result column="pf_concertPnums" property="concertPnums"
+			jdbcType="INTEGER" />
+		<result column="pf_sportPnums" property="sportPnums" jdbcType="INTEGER" />
+		<result column="pf_polityPnums" property="polityPnums"
+			jdbcType="INTEGER" />
+		<result column="pf_total" property="total" jdbcType="INTEGER" />
+		<association property="route" javaType="Route">
+			<id column="r_id" property="id" />
+			<result column="r_weight" property="weight" />
+			<association property="fromCity" javaType="City">
+				<id column="c_fromCityId" property="id" />
+				<result column="c_fromCityName" property="name" />
+			</association>
+			<association property="toCity" javaType="City">
+				<id column="c_toCityId" property="id" />
+				<result column="c_toCityName" property="name" />
+			</association>
+		</association>
+
+	</resultMap>
+
+	<sql id="baseSql">
+		select
+		pf.id as pf_id,
+		pf.date as pf_date,
+		pf.showPnums as pf_showPnums,
+		pf.concertPnums as pf_concertPnums,
+		pf.sportPnums as pf_sportPnums,
+		pf.polityPnums as pf_polityPnums,
+		pf.total as pf_total,
+		r.id as r_id,
+		r.weight as r_weight,
+		c1.id as c_fromCityId,
+		c1.name as c_fromCityName,
+		c2.id as c_toCityId,
+		c2.name as c_toCityName
+		from passengerFlow as pf
+		left join( routes as r
+		left join city c1 on r.fromCity = c1.id
+		left join city c2 on r.toCity = c2.id ) on pf.route = r.id
+  
+  </sql>
+	<sql id="whereSql">
+		<where>
+			<trim prefixOverrides="and">
+				<if test="from != null">
+					AND c1.id IN
+					<foreach collection="from" index="index" item="item" open="("
+						separator="," close=")">
+						#{item}
+                    </foreach>
+				</if>
+				<if test="to != null">
+					AND c2.id IN
+					<foreach collection="to" index="index" item="item" open="("
+						separator="," close=")">
+						#{item}
+                    </foreach>
+				</if>
+				<if test="date != null">
+					AND pf.date = #{date}
+                </if>
+			</trim>
+		</where>
+
+	</sql>
+
+	<insert id="insert" parameterType="PassengerFlow">
+		insert into passengerFlow (route ,date
+		,showPnums,concertPnums,sportPnums,polityPnums,total)
+		values(#{route.id},#{date,jdbcType=DATE},#{showPnums},#{concertPnums},#{sportPnums},#{polityPnums},#{total})
+
+	</insert>
+
+	<select id="searchAll" resultMap="passengerFlow">
+		<include refid="baseSql" />
+	</select>
+	<select id="searchByRouteDate" resultMap="passengerFlow">
+		<include refid="baseSql" />
+		<where>
+			r.id = #{route.id}
+			and pf.date =#{date,jdbcType=DATE}
+        </where>
+	</select>
+
+	<update id="updateByRouteDate" parameterType="PassengerFlow">
+		update passengerFlow
+		<set>
+			showPnums = #{showPnums},
+			concertPnums = #{concertPnums},
+			sportPnums = #{sportPnums},
+			polityPnums = #{polityPnums},
+			total = #{total}
+        </set>
+		where date = #{date,jdbcType=DATE} and route = #{route.id}
+	</update>
+
+	<select id="search" resultMap="passengerFlow">
+		<include refid="baseSql"></include>
+		<include refid="whereSql"></include>
+	</select>
+
+	<select id="groupByType" resultType="PassengerFlow">
+		SELECT
+		SUM(showPnums) AS showPnums ,
+		SUM(concertPnums) AS concertPnums,
+		SUM(sportPnums) AS sportPnums,
+		SUM(polityPnums) AS polityPnums
+		from passengerFlow as pf
+		left join( routes as r
+		left join city c1 on r.fromCity = c1.id
+		left join city c2 on r.toCity = c2.id ) on pf.route = r.id
+		<include refid="whereSql"></include>
+	</select>
+	<select id="searchPFByDate" parameterType="map" resultMap="passengerFlow" useCache="true" flushCache="false">
+		select
+		pf.id as pf_id,
+		pf.date as pf_date,
+		pf.total as pf_total,
+		r.id as r_id,
+		c1.id as c_fromCityId,
+		c1.name as c_fromCityName,
+		c2.id as c_toCityId,
+		c2.name as c_toCityName
+		from passengerFlow as pf
+		left join( routes as r
+		left join city c1 on r.fromCity = c1.id
+		left join city c2 on r.toCity = c2.id ) on pf.route = r.id
+		where 
+			pf.date >=#{startDate,jdbcType=DATE} and pf.date &lt;=#{endDate,jdbcType=DATE}
+		order by pf.date
+	</select>
+
+</mapper>

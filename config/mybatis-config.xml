@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+ 	<settings>
+        <!-- 开启二级缓存，默认是false -->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+    <typeAliases>
+        <typeAlias type="com.model.Event" alias="Event"/>
+        <typeAlias type="com.model.Weather" alias="Weather"/>
+        <typeAlias type="com.model.WeatherURL" alias="WeatherURL"/>
+        <typeAlias type="com.model.Employee" alias="Employee"/>
+        <typeAlias type="com.model.City" alias="City"/>
+        <typeAlias type="com.model.GroupBy" alias="GroupBy"/>
+        <typeAlias type="com.model.EventSf" alias="EventSf"/>
+        <typeAlias type="com.model.PassengerFlow" alias="PassengerFlow"/>
+        <typeAlias type="com.model.Flight" alias="Flight"/>
+        <typeAlias type="com.model.Route" alias="Route"/>
+        <typeAlias type="com.model.QRCode" alias="QRCode"/>
+    </typeAliases>
+
+    <plugins>
+        <!-- com.github.pagehelper为PageHelper类所在包名 -->
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <property name="dialect" value="mysql"/>
+            <property name="reasonable" value="true"/>
+        </plugin>
+    </plugins>
+</configuration>

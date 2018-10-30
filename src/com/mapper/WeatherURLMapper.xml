@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.DAO.WeatherURLDAO">
+    <resultMap type="WeatherURL" id="weatherURLMap">
+        <id column="w_id" property="id" jdbcType="INTEGER"/>
+        <result column="w_urlA" property="urlA" jdbcType="VARCHAR"/>
+        <result column="w_urlB" property="urlB" jdbcType="VARCHAR"/>
+        <association property="city" javaType="City">
+            <id property="id" column="c_id"/>
+            <result property="name" column="c_name"/>
+            <result property="low" column="c_low"/>
+            <result property="mid" column="c_mid"/>
+            <result property="high" column="c_high"/>
+        </association>
+    </resultMap>
+
+    <select id="selectAll" resultMap="weatherURLMap">
+		SELECT w.id as w_id ,
+		w.urlA as w_urlA,
+		w.urlB as w_urlB,
+		c.id as c_id,
+		c.name as c_name ,
+		c.low as c_low,
+		c.mid as c_mid,
+		c.high as c_high
+		FROM weatherURL w left join city c on c.id = w.city
+	</select>
+
+    <select id="query" resultMap="weatherURLMap" parameterType="String" useCache="false">
+        SELECT w.id as w_id ,
+        w.urlA as w_urlA,
+        w.urlB as w_urlB,
+        c.id as c_id,
+        c.name as c_name ,
+        c.low as c_low,
+        c.mid as c_mid,
+        c.high as c_high
+        FROM weatherURL w left join city c on c.id = w.city
+        WHERE 1 = 1
+        <if test="_parameter!=null">
+            AND c.name LIKE CONCAT('%', #{_parameter}, '%')
+        </if>
+    </select>
+
+    <update id="update" parameterType="WeatherURL" flushCache="true">
+        update weatherURL
+        <set>
+            <if test="urlA!=null">
+                urlA = #{urlA},
+            </if>
+            <if test="urlB!=null">
+                urlB = #{urlB},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <insert id="insert" parameterType="WeatherURL" flushCache="true">
+		insert into weatherURL (city,urlA,urlB) values (#{city.id},#{urlA},#{urlB})
+	</insert>
+
+    <delete id="delete" parameterType="List">
+        DELETE FROM weatherURL
+        where id in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+</mapper>

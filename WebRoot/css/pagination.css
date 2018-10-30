@@ -1,0 +1,49 @@
+@charset "UTF-8";
+.cPager{
+    text-align: center;
+    padding-top: 20px;
+}
+
+.cPager span{
+	margin:0 5px;
+	width: 38px;
+    height: 38px;
+    line-height: 38px;
+    color: #bdbdbd;
+    font-size: 14px;
+    display: inline-block;
+}
+.cPager .active{
+	margin:0 5px;
+	width: 38px;
+    height: 38px;
+    line-height: 38px;
+    background: #2a6496;
+    color: #fff;
+    font-size: 14px;
+    border: 1px solid #2a6496;
+}
+.cPager a{
+	margin:0 5px;
+	width: 38px;
+    height: 38px;
+    line-height: 38px;
+    background: #fff;
+    border: 1px solid #ebebeb;
+    color: #bdbdbd;
+    font-size: 14px;
+    display: inline-block;
+}
+.cPager a:hover{
+	color:#fff;
+    background: #2a6496;
+}
+.cPager .next,.cPager .prev{
+	font-family: "Simsun";
+    font-size: 16px;
+    font-weight: bold;
+}
+.now, .count{
+	padding:0 5px;
+	color:#428bca;
+}

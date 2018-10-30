@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.DAO.QRCodeDAO">
+	<resultMap type="QRCode" id="qRCode">
+		<id column="q_id" property="id" jdbcType="INTEGER" />
+		<result column="q_uid" property="uid" jdbcType="VARCHAR" />
+		<association property="employee" javaType="Employee">
+			<id column="e_id" property="id" jdbcType="INTEGER" />
+			<id column="e_no" property="no" jdbcType="VARCHAR" />
+			<id column="e_name" property="name" jdbcType="VARCHAR" />
+			<id column="e_phone" property="phone" jdbcType="VARCHAR" />
+			<id column="e_email" property="emali" jdbcType="VARCHAR" />
+			<id column="e_authority" property="authority" jdbcType="INTEGER" />
+			<result column="e_onduty" property="onduty" javaType="boolean" jdbcType="BIT"/>
+		</association>
+	</resultMap>
+
+
+	<select id="searchByUid" resultMap="qRCode" parameterType="map">
+		select
+		q.id as q_id,
+		q.uid as q_uid,
+		e.id as e_id,
+		e.name as e_name,
+		e.no as e_no,
+		e.phone as e_phone,
+		e.email as e_eamil,
+		e.authority as e_authority,
+		e.onduty as e_onduty
+		from qrcode as q
+		left join employee as e on q.userId=e.id
+		where uid = #{uid}
+	</select>
+	<insert id="insert" parameterType="QRCode" useGeneratedKeys="true"
+		keyProperty="id" keyColumn="id">
+		INSERT INTO qrcode (uid,userId) VALUES (#{uid},#{employee.id})
+	</insert>
+	<update id="update" parameterType="QRCode" flushCache="true">
+		update qrcode
+		set uid =#{uid}, userId=#{employee.id}
+		WHERE id=#{id}
+	</update>
+</mapper>

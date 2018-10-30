@@ -1,0 +1,40 @@
+<svg width="100%" height="100%" viewBox="0 0 1280 659" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <style>
+        [class^=obj] {opacity: 0;animation: fadeInOut 8s linear infinite;transform-origin:center}
+        .obj1 {animation-delay: 0s;}
+        .obj2 {animation-delay: 1s;}
+        .obj3 {animation-delay: 8s;}
+        .obj4 {animation-delay: 0.6s;}
+        .obj5 {animation-delay: 1s;}
+        .obj6 {animation-delay: 5s;}
+        .obj7 {animation-delay: 0.8s;}
+        .obj8 {animation-delay: 2.5s;}
+        .obj9 {animation-delay: 2s;}
+        .obj10 {animation-delay: 0.2s;}
+
+        @keyframes fadeInOut {
+          0% {opacity: 0;transform: scale(.2);}
+          40% {opacity: 1;transform: scale(1);}
+          60% {opacity: 1;transform: scale(1);}
+          100% {opacity: 0;transform: scale(.2);}
+        }
+    </style>
+    <circle class="obj1" cx="1208.21" cy="74.6" r="8.941" style="fill:rgb(86,134,253);"/>
+    <circle class="obj2" cx="490.604" cy="605.084" r="8.027" style="fill:none;stroke:rgb(251,176,59);stroke-width:8.88px;"/>
+    <circle class="obj3" cx="1273.92" cy="53.619" r="5.353" style="fill:rgb(237,86,92);"/>
+    <path class="obj4" d="M57.975,144.844C65.762,136.952 65.678,124.241 57.786,116.454L43.685,130.744L57.975,144.844Z" style="fill:rgb(108,203,195);fill-rule:nonzero;"/>
+    <path class="obj5" d="M0,469.582C0.005,475.867 2.407,482.15 7.205,486.941L24.557,469.564L0,469.582Z" style="fill:rgb(62,151,209);fill-rule:nonzero;"/>
+    <g class="rotate1">
+    <path class="obj6" d="M580.404,39.495C579.139,38.23 577.088,38.23 575.823,39.495C574.558,40.76 574.558,42.811 575.823,44.076L594.007,62.26C595.272,63.525 597.323,63.525 598.588,62.26C599.853,60.995 599.853,58.944 598.588,57.679L580.404,39.495Z" style="fill:rgb(86,134,253);fill-rule:nonzero;"/>
+    </g>
+    <g class="rotate2">
+    <path class="obj7" d="M531.517,0C529.728,0 528.278,1.45 528.278,3.239C528.278,5.028 529.728,6.478 531.517,6.478L545.713,6.478C547.502,6.478 548.952,5.028 548.952,3.239C548.952,1.45 547.502,0 545.713,0L531.517,0Z" style="fill:rgb(237,86,92);fill-rule:nonzero;"/>
+    </g>
+    <g class="rotate3">
+    <path class="obj8" d="M392.585,591.619C391.181,593.023 391.181,595.3 392.585,596.704C393.989,598.108 396.266,598.108 397.67,596.704L408.814,585.561C410.218,584.157 410.218,581.88 408.814,580.476C407.409,579.072 405.133,579.072 403.728,580.476L392.585,591.619Z" style="fill:rgb(237,86,92);fill-rule:nonzero;"/>
+    </g>
+    <g class="rotate4">
+    <path class="obj9" d="M1106.89,451.213C1105.42,452.681 1105.42,455.06 1106.89,456.528C1108.36,457.995 1110.74,457.995 1112.2,456.528L1123.85,444.882C1125.32,443.414 1125.32,441.035 1123.85,439.567C1122.38,438.099 1120,438.099 1118.53,439.567L1106.89,451.213Z" style="fill:rgb(237,86,92);fill-rule:nonzero;"/>
+    </g>
+    <circle class="obj10" cx="52.985" cy="437.578" r="3.733" style="fill:rgb(251,176,59);"/>
+</svg>

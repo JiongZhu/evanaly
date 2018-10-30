@@ -1,0 +1,775 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.DAO.EventDAO">
+	<resultMap type="Event" id="event">
+		<id column="e_id" property="id" jdbcType="INTEGER" />
+		<result column="e_name" property="name" jdbcType="VARCHAR" />
+		<result column="e_sponsorLevel" property="sponsorLevel"
+			jdbcType="INTEGER" />
+		<result column="e_sponsorType" property="sponsorType" jdbcType="INTEGER" />
+		<result column="e_affectAge" property="affectAge" jdbcType="INTEGER" />
+		<result column="e_fixedParticipation" property="fixedParticipation"
+			jdbcType="INTEGER" />
+		<result column="e_affectRange" property="affectRange" jdbcType="INTEGER" />
+		<result column="e_affectCommunity" property="affectCommunity"
+			jdbcType="INTEGER" />
+		<result column="e_type" property="type" jdbcType="INTEGER" />
+		<result column="e_heat" property="heat" jdbcType="INTEGER" />
+		<result column="e_historicalLevel" property="historicalLevel"
+			jdbcType="INTEGER" />
+		<result column="e_frequency" property="frequency" jdbcType="INTEGER" />
+		<result column="e_startDate" property="startDate" jdbcType="DATE" />
+		<result column="e_endDate" property="endDate" jdbcType="DATE" />
+		<result column="e_pnums" property="pnums" jdbcType="INTEGER" />
+		<result column="e_src" property="src" jdbcType="INTEGER" />
+		<association property="city" javaType="City">
+			<id column="c_id" property="id" jdbcType="INTEGER" />
+			<result column="c_name" property="name" jdbcType="VARCHAR" />
+		</association>
+	</resultMap>
+
+	<resultMap id="groupBy" type="GroupBy">
+		<result column="type" property="type" jdbcType="VARCHAR" />
+		<result column="date" property="date" jdbcType="DATE" />
+		<result column="count" property="count" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="sprider_sql">
+		select
+		e.id as e_id,
+		e.name as e_name,
+		e.sponsorLevel as e_sponsorLevel,
+		e.sponsorType as e_sponsorType,
+		e.affectCommunity as e_affectCommunity,
+		e.affectAge as e_affectAge,
+		e.fixedParticipation as e_fixedParticipation,
+		e.affectRange as e_affectRange,
+		e.type as e_type,
+		e.heat as e_heat,
+		e.historicalLevel as e_historicalLevel,
+		e.frequency as e_frequency,
+		e.startDate as e_startDate,
+		e.endDate as e_endDate,
+		e.city as e_city,
+		e.keyWords as e_keyWords,
+		e.pnums as e_pnums,
+		e.src as e_src,
+		c.id as c_id,
+		c.name as c_name
+		from events e left join city c on e.city = c.id
+		<where>
+			<trim prefixOverrides="or | and">
+				<if test="type != null">
+					<if test="type.exhibition != null">
+						<trim prefix="(" suffix=")" prefixOverrides="and">
+							<if test="type.exhibition.sponsorLevel!=null">
+								sponsorLevel = #{type.exhibition.sponsorLevel}
+                            </if>
+							<if test="type.exhibition.sponsorType!=null">
+								and sponsorType = #{type.exhibition.sponsorType}
+                            </if>
+							<if test="type.exhibition.affectCommunity!=null">
+								and affectCommunity = #{type.exhibition.affectCommunity}
+                            </if>
+							<if test="type.exhibition.affectAge!=null">
+								and affectAge = #{type.exhibition.affectAge}
+                            </if>
+							<if test="type.exhibition.fixedParticipation!=null">
+								and fixedParticipation = #{type.exhibition.fixedParticipation}
+                            </if>
+							<if test="type.exhibition.affectRange!=null">
+								and affectRange = #{type.exhibition.affectRange}
+                            </if>
+							<if test="type.exhibition.type!=null">
+								and type = #{type.exhibition.type}
+                            </if>
+							<if test="type.exhibition.heat!=null">
+								and heat = #{type.exhibition.heat}
+                            </if>
+							<if test="type.exhibition.historicalLevel!=null">
+								and historicalLevel = #{type.exhibition.historicalLevel}
+                            </if>
+							<if test="type.exhibition.frequency!=null">
+								and frequency = #{type.exhibition.frequency}
+                            </if>
+							<if test="startDate!=null">
+								and startDate &gt;= #{startDate}
+                            </if>
+							<if test="endDate!=null">
+								and endDate &lt;= #{endDate}
+                            </if>
+							<if test="cityID != null">
+								and e.city IN
+								<foreach collection="cityID" index="index" item="item"
+									open="(" separator="," close=")">
+									#{item}
+                                </foreach>
+							</if>
+							<if test="src!=null">
+								and src IN
+								<foreach collection="src" index="index" item="item"
+									open="(" separator="," close=")">
+									#{item}
+                                </foreach>
+							</if>
+						</trim>
+					</if>
+
+					<if test="type.concert != null">
+						or
+						<trim prefix="(" suffix=")" prefixOverrides="and">
+							<if test="type.concert.sponsorLevel!=null">
+								sponsorLevel = #{type.concert.sponsorLevel}
+                            </if>
+							<if test="type.concert.sponsorType!=null">
+								and sponsorType = #{type.concert.sponsorType}
+                            </if>
+							<if test="type.concert.affectCommunity!=null">
+								and affectCommunity = #{type.concert.affectCommunity}
+                            </if>
+							<if test="type.concert.affectAge!=null">
+								and affectAge = #{type.concert.affectAge}
+                            </if>
+							<if test="type.concert.fixedParticipation!=null">
+								and fixedParticipation = #{type.concert.fixedParticipation}
+                            </if>
+							<if test="type.concert.affectRange!=null">
+								and affectRange = #{type.concert.affectRange}
+                            </if>
+							<if test="type.concert.type!=null">
+								and type = #{type.concert.type}
+                            </if>
+							<if test="type.concert.heat!=null">
+								and heat = #{type.concert.heat}
+                            </if>
+							<if test="type.concert.historicalLevel!=null">
+								and historicalLevel = #{type.concert.historicalLevel}
+                            </if>
+							<if test="type.concert.frequency!=null">
+								and frequency = #{type.concert.frequency}
+                            </if>
+							<if test="startDate!=null">
+								and startDate &gt;= #{startDate}
+                            </if>
+							<if test="endDate!=null">
+								and startDate &lt;= #{endDate}
+                            </if>
+							<if test="cityID != null">
+								and e.city IN
+								<foreach collection="cityID" index="index" item="item"
+									open="(" separator="," close=")">
+									#{item}
+                                </foreach>
+							</if>
+							<if test="src!=null">
+								and src IN
+								<foreach collection="src" index="index" item="item"
+									open="(" separator="," close=")">
+									#{item}
+                                </foreach>
+							</if>
+						</trim>
+					</if>
+
+					<if test="type.sport != null">
+						or
+						<trim prefix="(" suffix=")" prefixOverrides="and">
+							<if test="type.sport.sponsorLevel!=null">
+								sponsorLevel = #{type.sport.sponsorLevel}
+                            </if>
+							<if test="type.sport.sponsorType!=null">
+								and sponsorType = #{type.sport.sponsorType}
+                            </if>
+							<if test="type.sport.affectCommunity!=null">
+								and affectCommunity = #{type.sport.affectCommunity}
+                            </if>
+							<if test="type.sport.affectAge!=null">
+								and affectAge = #{type.sport.affectAge}
+                            </if>
+							<if test="type.sport.fixedParticipation!=null">
+								and fixedParticipation = #{type.sport.fixedParticipation}
+                            </if>
+							<if test="type.sport.affectRange!=null">
+								and affectRange = #{type.sport.affectRange}
+                            </if>
+							<if test="type.sport.type!=null">
+								and type = #{type.sport.type}
+                            </if>
+							<if test="type.sport.heat!=null">
+								and heat = #{type.sport.heat}
+                            </if>
+							<if test="type.sport.historicalLevel!=null">
+								and historicalLevel = #{type.sport.historicalLevel}
+                            </if>
+							<if test="type.sport.frequency!=null">
+								and frequency = #{type.sport.frequency}
+                            </if>
+							<if test="startDate!=null">
+								and startDate &gt;= #{startDate}
+                            </if>
+							<if test="endDate!=null">
+								and endDate &lt;= #{endDate}
+                            </if>
+							<if test="cityID != null">
+								and e.city IN
+								<foreach collection="cityID" index="index" item="item"
+									open="(" separator="," close=")">
+									#{item}
+                                </foreach>
+							</if>
+							<if test="src!=null">
+								and src IN
+								<foreach collection="src" index="index" item="item"
+									open="(" separator="," close=")">
+									#{item}
+                                </foreach>
+							</if>
+						</trim>
+					</if>
+
+					<if test="type.meeting != null">
+						or
+						<trim prefix="(" suffix=")" prefixOverrides="and">
+							<if test="type.meeting.sponsorLevel!=null">
+								sponsorLevel = #{type.meeting.sponsorLevel}
+                            </if>
+							<if test="type.meeting.sponsorType!=null">
+								and sponsorType = #{type.meeting.sponsorType}
+                            </if>
+							<if test="type.meeting.affectCommunity!=null">
+								and affectCommunity = #{type.meeting.affectCommunity}
+                            </if>
+							<if test="type.meeting.affectAge!=null">
+								and affectAge = #{type.meeting.affectAge}
+                            </if>
+							<if test="type.meeting.fixedParticipation!=null">
+								and fixedParticipation = #{type.meeting.fixedParticipation}
+                            </if>
+							<if test="type.meeting.affectRange!=null">
+								and affectRange = #{type.meeting.affectRange}
+                            </if>
+							<if test="type.meeting.type!=null">
+								and type = #{type.meeting.type}
+                            </if>
+							<if test="type.meeting.heat!=null">
+								and heat = #{type.meeting.heat}
+                            </if>
+							<if test="type.meeting.historicalLevel!=null">
+								and historicalLevel = #{type.meeting.historicalLevel}
+                            </if>
+							<if test="type.meeting.frequency!=null">
+								and frequency = #{type.meeting.frequency}
+                            </if>
+							<if test="startDate!=null">
+								and startDate &gt;= #{startDate}
+                            </if>
+							<if test="endDate!=null">
+								and endDate &lt;= #{endDate}
+                            </if>
+							<if test="cityID != null">
+								and e.city IN
+								<foreach collection="cityID" index="index" item="item"
+									open="(" separator="," close=")">
+									#{item}
+                                </foreach>
+							</if>
+							<if test="src!=null">
+								and src IN
+								<foreach collection="src" index="index" item="item"
+									open="(" separator="," close=")">
+									#{item}
+                                </foreach>
+							</if>
+						</trim>
+					</if>
+
+					<if test="type.holiday != null">
+						or
+						<trim prefix="(" suffix=")" prefixOverrides="and">
+							<if test="type.holiday.sponsorLevel!=null">
+								sponsorLevel = #{type.holiday.sponsorLevel}
+                            </if>
+							<if test="type.holiday.sponsorType!=null">
+								and sponsorType = #{type.holiday.sponsorType}
+                            </if>
+							<if test="type.holiday.affectCommunity!=null">
+								and affectCommunity = #{type.holiday.affectCommunity}
+                            </if>
+							<if test="type.holiday.affectAge!=null">
+								and affectAge = #{type.holiday.affectAge}
+                            </if>
+							<if test="type.holiday.fixedParticipation!=null">
+								and fixedParticipation = #{type.holiday.fixedParticipation}
+                            </if>
+							<if test="type.holiday.affectRange!=null">
+								and affectRange = #{type.holiday.affectRange}
+                            </if>
+							<if test="type.holiday.type!=null">
+								and type = #{type.holiday.type}
+                            </if>
+							<if test="type.holiday.heat!=null">
+								and heat = #{type.holiday.heat}
+                            </if>
+							<if test="type.holiday.historicalLevel!=null">
+								and historicalLevel = #{type.holiday.historicalLevel}
+                            </if>
+							<if test="type.holiday.frequency!=null">
+								and frequency = #{type.holiday.frequency}
+                            </if>
+							<if test="startDate!=null">
+								and startDate &gt;= #{startDate}
+                            </if>
+							<if test="endDate!=null">
+								and endDate &lt;= #{endDate}
+                            </if>
+							<if test="cityID != null">
+								and e.city IN
+								<foreach collection="cityID" index="index" item="item"
+									open="(" separator="," close=")">
+									#{item}
+                                </foreach>
+							</if>
+							<if test="src!=null">
+								and src IN
+								<foreach collection="src" index="index" item="item"
+									open="(" separator="," close=")">
+									#{item}
+                                </foreach>
+							</if>
+						</trim>
+					</if>
+				</if>
+			</trim>
+			<if test="startDate!=null">
+				and startDate &gt;= #{startDate}
+            </if>
+			<if test="endDate!=null">
+				and startDate &lt;= #{endDate}
+            </if>
+			<if test="cityID != null">
+				and e.city IN
+				<foreach collection="cityID" index="index" item="item" open="("
+					separator="," close=")">
+					#{item}
+                </foreach>
+			</if>
+			<if test="src!=null">
+				and src IN
+				<foreach collection="src" index="index" item="item" open="("
+					separator="," close=")">
+					#{item}
+                </foreach>
+			</if>
+		</where>
+	</sql>
+
+	<sql id="condition_where_clause">
+		<if test="name!=null and  name!=''">
+			and name LIKE CONCAT('%', #{name}, '%')
+        </if>
+
+		<if test="sponsorLevel!=null">
+			and sponsorLevel = #{sponsorLevel}
+        </if>
+
+		<if test="sponsorType!=null">
+			and sponsorType = #{sponsorType}
+        </if>
+		<if test="affectCommunity!=null">
+			and affectCommunity = #{affectCommunity}
+        </if>
+		<if test="affectAge!=null">
+			and affectAge = #{affectAge}
+        </if>
+
+		<if test="fixedParticipation!=null">
+			and fixedParticipation = #{fixedParticipation}
+        </if>
+
+		<if test="affectRange!=null">
+			and affectRange = #{affectRange}
+        </if>
+
+		<if test="type!=null">
+			and type = #{type}
+        </if>
+
+		<if test="heat!=null">
+			and heat = #{heat}
+        </if>
+
+		<if test="historicalLevel!=null">
+			and historicalLevel = #{historicalLevel}
+        </if>
+
+		<if test="startDate!=null">
+			and startDate = #{startDate}
+        </if>
+
+		<if test="endDate!=null">
+			and endDate = #{endDate}
+        </if>
+		<if test="city!=null and city.id!=null">
+			and city = #{city.id}
+        </if>
+		<if test="pnums!=null">
+			and pnums = #{pnums}
+        </if>
+		<if test="src!=null">
+			and src = #{src}
+        </if>
+		<if test="frequency!=null">
+			and frequency = #{frequency}
+        </if>
+
+	</sql>
+
+	<insert id="insert" parameterType="Event">
+		insert into
+		events(name,sponsorLevel,sponsorType,affectCommunity,affectAge,fixedParticipation,affectRange,
+		type,heat,historicalLevel,frequency,startDate,endDate,city,pnums,keyWords,src)
+		values(#{name},#{sponsorLevel},#{sponsorType},#{affectCommunity},#{affectAge},#{fixedParticipation},#{affectRange},
+		#{type},#{heat},#{historicalLevel},#{frequency},#{startDate},#{endDate},#{city.id},#{pnums},#{keyWords},#{src})
+	</insert>
+
+	<select id="search" resultMap="event" parameterType="Event">
+		select
+		e.id as e_id,
+		e.name as e_name,
+		e.sponsorLevel as e_sponsorLevel,
+		e.sponsorType as e_sponsorType,
+		e.affectCommunity as e_affectCommunity,
+		e.affectAge as e_affectAge,
+		e.fixedParticipation as e_fixedParticipation,
+		e.affectRange as e_affectRange,
+		e.type as e_type,
+		e.heat as e_heat,
+		e.historicalLevel as e_historicalLevel,
+		e.frequency as e_frequency,
+		e.startDate as e_startDate,
+		e.endDate as e_endDate,
+		e.city as e_city,
+		e.pnums as e_pnums,
+		e.keyWords as e_keyWords,
+		e.pnums as e_pnums,
+		e.src as e_src,
+		c.id as c_id,
+		c.name as c_name
+		from events e left join city c on e.city = c.id
+		<where>
+			1 = 1
+			<include refid="condition_where_clause"></include>
+		</where>
+	</select>
+
+	<select id="query" resultMap="event" parameterType="Map">
+		select
+		e.id as e_id,
+		e.name as e_name,
+		e.sponsorLevel as e_sponsorLevel,
+		e.sponsorType as e_sponsorType,
+		e.affectCommunity as e_affectCommunity,
+		e.affectAge as e_affectAge,
+		e.fixedParticipation as e_fixedParticipation,
+		e.affectRange as e_affectRange,
+		e.type as e_type,
+		e.heat as e_heat,
+		e.historicalLevel as e_historicalLevel,
+		e.frequency as e_frequency,
+		e.startDate as e_startDate,
+		e.endDate as e_endDate,
+		e.city as e_city,
+		e.keyWords as e_keyWords,
+		e.pnums as e_pnums,
+		e.src as e_src,
+		c.id as c_id,
+		c.name as c_name
+		from events e left join city c on e.city = c.id
+		<where>
+			1 = 1
+			<if test="name!=null">
+				and e.name LIKE CONCAT('%', #{name}, '%')
+            </if>
+
+			<if test="sponsorLevel!=null">
+				and sponsorLevel = #{sponsorLevel, jdbcType=INTEGER}
+            </if>
+
+			<if test="sponsorType!=null">
+				and sponsorType = #{sponsorType, jdbcType=INTEGER}
+            </if>
+			<if test="affectCommunity!=null">
+				and affectCommunity = #{affectCommunity, jdbcType=INTEGER}
+            </if>
+			<if test="affectAge!=null">
+				and affectAge = #{affectAge, jdbcType=INTEGER}
+            </if>
+
+			<if test="fixedParticipation!=null">
+				and fixedParticipation = #{fixedParticipation, jdbcType=INTEGER}
+            </if>
+
+			<if test="affectRange!=null">
+				and affectRange = #{affectRange, jdbcType=INTEGER}
+            </if>
+
+			<if test="type!=null">
+				and type = #{type, jdbcType=INTEGER}
+            </if>
+
+			<if test="heat!=null">
+				and heat = #{heat, jdbcType=INTEGER}
+            </if>
+
+			<if test="historicalLevel!=null">
+				and historicalLevel = #{historicalLevel, jdbcType=INTEGER}
+            </if>
+
+			<if test="startDate!=null">
+				and startDate &gt;= #{startDate, jdbcType=DATE}
+            </if>
+
+			<if test="endDate!=null">
+				and endDate &lt;= #{endDate, jdbcType=DATE}
+            </if>
+			<if test="cityID != null">
+				and e.city IN
+				<foreach collection="cityID" index="index" item="item" open="("
+					separator="," close=")">
+					#{item, jdbcType=INTEGER}
+                </foreach>
+			</if>
+			<if test="frequency!=null">
+				and frequency = #{frequency, jdbcType=INTEGER}
+            </if>
+		</where>
+	</select>
+
+	<select id="sprider" resultMap="event" parameterType="Map"
+		useCache="false">
+		<include refid="sprider_sql"></include>
+	</select>
+
+	<select id="searchByKW" resultMap="event">
+		select * from events
+		<where>
+			1 = 1
+			<if test="event.name!=null and  event.name!=''">
+				and name LIKE CONCAT('%', #{event.name}, '%')
+            </if>
+
+			<if test="event.sponsorLevel!=null ">
+				and sponsorLevel = #{event.sponsorLevel}
+            </if>
+
+			<if test="event.sponsorType!=null">
+				and sponsorType = #{event.sponsorType}
+            </if>
+			<if test="event.affectCommunity!=null">
+				and affectCommunity = #{event.affectCommunity}
+            </if>
+			<if test="event.affectAge!=null">
+				and affectAge = #{event.affectAge}
+            </if>
+
+			<if test="event.fixedParticipation!=null">
+				and fixedParticipation = #{event.fixedParticipation}
+            </if>
+
+			<if test="event.affectRange!=null">
+				and affectRange = #{event.affectRange}
+            </if>
+
+			<if test="event.type!=null">
+				and type = #{event.type}
+            </if>
+
+			<if test="event.heat!=null">
+				and heat = #{event.heat}
+            </if>
+
+			<if test="event.historicalLevel!=null">
+				and historicalLevel = #{event.historicalLevel}
+            </if>
+
+			<if test="event.startDate!=null">
+				and startDate = #{event.startDate,jdbcType=DATE}
+            </if>
+
+			<if test="event.endDate!=null">
+				and endDate = #{event.endDate,jdbcType=DATE}
+            </if>
+			<if test="event.city!=null">
+				and city = #{event.city.id}
+            </if>
+			<if test="keyWords!=null">
+				and
+				<foreach collection="keyWords" open="(" close=")" item="kw"
+					separator="or">
+					name LIKE CONCAT('%', #{kw}, '%')
+                </foreach>
+			</if>
+
+		</where>
+	</select>
+
+	<update id="update" parameterType="Event">
+		UPDATE events
+		<trim prefix="set" suffixOverrides=",">
+			<if test="name!=null and name!=''">name = #{name},</if>
+			<if test="sponsorLevel!=null">sponsorLevel = #{sponsorLevel},</if>
+			<if test="sponsorType!=null">sponsorType = #{sponsorType},</if>
+			<if test="affectCommunity!=null">affectCommunity = #{affectCommunity},</if>
+			<if test="affectAge!=null">affectAge = #{affectAge},</if>
+			<if test="fixedParticipation!=null">fixedParticipation = #{fixedParticipation},</if>
+			<if test="affectRange!=null">affectRange = #{affectRange},</if>
+			<if test="type!=null">type = #{type},</if>
+			<if test="heat!=null">heat = #{heat},</if>
+			<if test="historicalLevel!=null">historicalLevel = #{historicalLevel},</if>
+			<if test="startDate!=null">startDate = #{startDate},</if>
+			<if test="endDate!=null">endDate = #{endDate},</if>
+			<if test="city!=null and city.id!=null">city = #{city.id},</if>
+			<if test="frequency!=null">frequency = #{frequency},</if>
+			<if test="pnums!=null">pnums = #{pnums},</if>
+		</trim>
+		WHERE id=#{id}
+	</update>
+
+	<delete id="delete" parameterType="Event">
+		DELETE FROM events WHERE id IN
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+        </foreach>
+	</delete>
+
+	<select id="groupbySponsorLevel" parameterType="Map" resultMap="groupBy">
+		SELECT e_sponsorLevel AS type, COUNT(*) AS count FROM
+		(
+		<include refid="sprider_sql"></include>
+		) as t
+		WHERE e_sponsorLevel != 0
+		GROUP BY e_sponsorLevel
+	</select>
+
+	<select id="groupbySponsorType" parameterType="Map" resultMap="groupBy">
+		SELECT e_sponsorType AS type, COUNT(*) AS count FROM
+		(
+		<include refid="sprider_sql"></include>
+		) as t
+		WHERE e_sponsorType != 0
+		GROUP BY e_sponsorType
+	</select>
+	<select id="groupbyAffectAge" parameterType="Map" resultMap="groupBy">
+		SELECT e_affectAge AS type, COUNT(*) AS count FROM
+		(
+		<include refid="sprider_sql"></include>
+		) as t
+		WHERE e_affectAge != 0
+		GROUP BY e_affectAge
+	</select>
+	<select id="groupbyAffectRange" parameterType="Map" resultMap="groupBy">
+		SELECT e_affectRange AS type, COUNT(*) AS count FROM
+		(
+		<include refid="sprider_sql"></include>
+		) as t
+		GROUP BY e_affectRange
+	</select>
+	<select id="groupbyType" parameterType="Map" resultMap="groupBy">
+		SELECT e_type AS type, COUNT(*) AS count FROM
+		(
+		<include refid="sprider_sql"></include>
+		) as t
+		GROUP BY e_type
+	</select>
+	<select id="groupbyHeat" parameterType="Map" resultMap="groupBy">
+		SELECT e_heat AS type, COUNT(*) AS count FROM
+		(
+		<include refid="sprider_sql"></include>
+		) as t
+		GROUP BY e_heat
+	</select>
+	<select id="groupbyCity" parameterType="Map" resultMap="groupBy">
+		SELECT c_name AS type, COUNT(*) AS count FROM
+		(
+		<include refid="sprider_sql"></include>
+		) as t
+		GROUP BY c_name
+	</select>
+	<select id="groupbyDate" parameterType="Map" resultMap="groupBy">
+		SELECT e_startDate AS type, COUNT(*) AS count FROM
+		(
+		<include refid="sprider_sql"></include>
+		) as t
+		GROUP BY e_startDate
+	</select>
+	<select id="groupbySrc" parameterType="Map" resultMap="groupBy">
+		SELECT e_src AS type, COUNT(*) AS count FROM
+		(
+		<include refid="sprider_sql"></include>
+		) as t
+		GROUP BY e_src
+	</select>
+
+
+	<!-- 城市事件总数 -->
+	<select id="eventsSum" parameterType="Map" resultType="INTEGER">
+		SELECT COUNT(*) FROM events
+		where startDate >= #{startDate} and endDate &lt;= #{endDate}
+    </select>
+	<!--事件类型分组  -->
+	<select id="groupByTypeDate" parameterType="Map" resultType="GroupBy">
+		SELECT type, COUNT(*) as count FROM events
+		where startDate >= #{startDate} and endDate &lt;= #{endDate}
+		GROUP BY type
+    </select>
+
+	<!-- 城市前5 -->
+	<select id="cityTopFive" parameterType="Map" resultType="GroupBy">
+		SELECT c.name AS type, COUNT(*) as count FROM events e LEFT JOIN city c on
+		e.city = c.id
+		where startDate >= #{startDate} and endDate &lt;= #{endDate}
+		GROUP BY e.city
+		ORDER BY count desc
+		limit 0,5
+    </select>
+	<!--指定时间段每天事件数  -->
+	<select id="eventsAmountByDate" parameterType="Map" resultType="GroupBy">
+		SELECT
+		startDate as date,
+		count(*) as count
+		from events
+		WHERE startDate >= #{startDate} and endDate &lt;= #{endDate}
+		GROUP BY startDate
+		ORDER BY startDate
+    </select>
+
+	<!-- 查询事件EventSf 为人流量作分析 -->
+	<select id="searchEventSf" parameterType="DATE" resultType="EventSf">
+		SELECT startDate as date,
+		type,
+		sum(pnums) as pnums,
+		c.id as city
+		from events e
+		LEFT JOIN city c on e.city = c.id
+		GROUP BY startDate ,type,e.city
+		having startDate >= #{date}
+    </select>
+
+	<select id="searchCityPFByDate" parameterType="map" resultType="EventSf">
+		SELECT
+		city,
+		startDate as date,
+		sum(pnums) as pnums
+		from events
+		WHERE
+		startDate >= #{startDate,jdbcType=DATE} and startDate &lt;=#{endDate,jdbcType=DATE}
+		group by city,startDate
+		ORDER BY startDate
+
+    </select>
+
+
+</mapper>

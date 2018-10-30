@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.DAO.WeatherDAO">
+    <resultMap type="Weather" id="weather">
+        <id column="w_id" property="id"/>
+        <result column="w_date" property="date"/>
+        <result column="w_minTem" property="minTem"/>
+        <result column="w_maxTem" property="maxTem"/>
+        <result column="w_wind" property="wind"/>
+        <result column="w_desc" property="description"/>
+        <association property="city" javaType="City">
+            <id property="id" column="c_id"/>
+            <result column="c_name" property="name"/>
+            <result column="c_low" property="low"/>
+            <result column="c_mid" property="mid"/>
+            <result column="c_high" property="high"/>
+        </association>
+    </resultMap>
+
+    <insert id="insert" parameterType="Weather" flushCache="true">
+        insert into weather(city,date,minTem,maxTem,wind,description)
+        values(#{city.id},#{date,jdbcType=DATE},#{minTem},#{maxTem},#{wind},#{description})
+    </insert>
+    <update id="update" parameterType="Weather" flushCache="true">
+        update weather
+        <set>
+
+            <if test="minTem!=null">
+                minTem = #{minTem},
+            </if>
+
+            <if test="maxTem!=null">
+                maxTem = #{maxTem},
+            </if>
+
+            <if test="wind!=null">
+                wind = #{wind},
+            </if>
+            <if test="description!=null">
+                description = #{description},
+            </if>
+
+        </set>
+        where date = #{date,jdbcType=DATE} and city = #{city.id}
+    </update>
+    <select id="search" resultMap="weather" parameterType="Weather">
+        select
+        w.id as w_id,
+        w.date as w_date,
+        w.minTem as w_minTem,
+        w.maxTem as w_maxTem,
+        w.wind as w_wind,
+        w.description as w_desc,
+        c.id as c_id,
+        c.name as c_name
+        from weather w left join city c on w.city = c.id
+        <where>
+            <if test="city!=null and city.id!=null">
+                and city = #{city.id}
+
+            </if>
+            <if test="date!=null">
+                and date = #{date,jdbcType=DATE}
+            </if>
+
+            <if test="minTem!=null">
+                and minTem = #{minTem}
+            </if>
+            <if test="maxTem!=null">
+                and maxTem = #{maxTem}
+            </if>
+
+            <if test="wind!=null">
+                and wind = #{wind}
+            </if>
+
+            <if test="description!=null">
+                and description = #{description}
+            </if>
+
+        </where>
+    </select>
+
+    <select id="searchFiveDay" parameterType="Weather" resultMap="weather">
+        SELECT
+        w.id as w_id,
+        w.date as w_date,
+        w.minTem as w_minTem,
+        w.maxTem as w_maxTem,
+        w.wind as w_wind,
+        w.description as w_desc,
+        c.id as c_id,
+        c.name as c_name FROM weather w INNER JOIN city c ON c.id = w.city
+        WHERE c.name LIKE CONCAT('%', #{city.name}, '%') AND w.date &gt;= #{date, jdbcType=DATE} AND w.date &lt;= DATE_ADD(#{date, jdbcType=DATE}, INTERVAL 4 DAY)
+    </select>
+	<select id = "searchWanrByDate" parameterType ="map" resultMap="weather">
+	SELECT
+        w.id as w_id,
+        w.date as w_date,
+        w.minTem as w_minTem,
+        w.maxTem as w_maxTem,
+        w.wind as w_wind,
+        w.description as w_desc,
+        c.id as c_id,
+        c.name as c_name FROM weather w INNER JOIN city c ON c.id = w.city
+		where  (wind like '%6%' or wind like '%7%' or description like '%暴雨%' or description like '%雷阵雨%') and (date >=#{startDate} and date &lt;=#{endDate})
+	</select>
+</mapper>

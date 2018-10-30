@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.DAO.CityDAO">
+<cache />
+	<resultMap type="City" id="city">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="low" property="low" jdbcType="INTEGER" />
+		<result column="mid" property="mid" jdbcType="INTEGER" />
+		<result column="high" property="high" jdbcType="INTEGER" />
+	</resultMap>
+
+
+	<select id="search" resultMap="city" parameterType="String" >
+		select * from city where name = #{name}
+	</select>
+	<select id="searchById" resultMap="city" parameterType="java.lang.Integer" >
+		select * from city where id = #{id,jdbcType=INTEGER}
+  	</select>
+	<select id="getAllCity" resultMap="city" useCache="true" flushCache="false">
+		SELECT * FROM city
+	</select>
+	<select id="pagingQuery" resultMap="city" parameterType="map" useCache="true" flushCache="false">
+		SELECT * FROM city WHERE 1 = 1
+		<if test="name!=null and name != ''">
+			and name LIKE CONCAT('%', #{name}, '%')
+		</if>
+	</select>
+	<delete id="delete" parameterType="list" flushCache="true">
+        DELETE FROM city WHERE id IN
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+	<insert id="insert" parameterType="City" useGeneratedKeys="true" keyProperty="id" keyColumn="id"  flushCache="true"> 
+		INSERT INTO city (name,low,mid,high) VALUES (#{name},#{low},#{mid},#{high})
+	</insert>
+	<update id="update" parameterType="City" flushCache="true">
+		update city
+		 <trim prefix="set" suffixOverrides=",">
+		 	<if test="name!=null and name!=''">
+		 		name=#{name},
+		 	</if>
+		 	<if test="low!=null and low!=0">
+		 		low=#{low},
+		 	</if>
+		 	<if test="mid!=null and mid!=0">
+		 		low=#{mid},
+		 	</if>
+		 	<if test="high!=null and high!=0">
+		 		high=#{high},
+		 	</if>
+		 </trim>
+		WHERE id=#{id}
+	</update>
+</mapper>

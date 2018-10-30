@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.DAO.EmployeeDAO">
+	<cache/>
+    <resultMap id="employee" type="Employee">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <result column="phone" property="phone"></result>
+        <result column="email" property="email"></result>
+        <result column="password" property="password"></result>
+        <result column="no" property="no"></result>
+        <result column="authority" property="authority"></result>
+        <result column="onduty" property="onduty" javaType="boolean" jdbcType="BIT"></result>
+    </resultMap>
+
+    <select id="select" parameterType="Employee" resultMap="employee" useCache="true" flushCache="false">
+        SELECT * FROM employee
+        WHERE 1= 1
+        <if test="onduty != null">
+            AND onduty = #{onduty}
+        </if>
+        <if test="name != null and name != ''">
+            AND name = #{name}
+        </if>
+        <if test="password != null and password != ''">
+            AND password = #{password}
+        </if>
+        <if test="phone != null and phone != ''">
+            AND phone = #{phone}
+        </if>
+        <if test="email != null and email != ''">
+            AND email = #{email}
+        </if>
+        <if test="no != null and no != ''">
+            AND no = #{no}
+        </if>
+        <if test="authority != null">
+            AND authority = #{authority}
+        </if>
+    </select>
+
+    <select id="pagingQuery" resultMap="employee" parameterType="Employee" useCache="true" flushCache="false">
+        SELECT id, no, name, phone, email, authority FROM employee WHERE onduty = 1
+        <if test="name != null and name != ''">
+            AND name LIKE CONCAT('%', #{name}, '%')
+        </if>
+    </select>
+
+    <select id="login" parameterType="Employee" resultMap="employee" useCache="true" flushCache="false">
+        SELECT * FROM employee
+        WHERE onduty = true AND password = #{password} AND no = #{no}
+    </select>
+
+    <insert id="insert" parameterType="Employee" flushCache="true" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO employee (no, name, password, phone, email, onduty, authority)
+          VALUES (#{no}, #{name}, SUBSTRING(#{no}, -6), #{phone}, #{email}, 1, #{authority})
+    </insert>
+    <insert id="insertBatch" parameterType="java.util.List"  >
+        INSERT INTO employee (no, name, password, phone, email, onduty, authority)
+          VALUES 
+            <foreach collection="list" item="item" index="index" separator=",">
+           (#{item.no}, #{item.name}, SUBSTRING(#{item.no}, -6), #{item.phone}, #{item.email}, 1, #{item.authority})
+            </foreach>
+    </insert>
+
+    <update id="update" parameterType="Employee">
+        UPDATE employee
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name != null and name != ''">name=#{name},</if>
+            <if test="password != null and password != ''">password=#{password},</if>
+            <if test="phone != null and phone != ''">phone=#{phone},</if>
+            <if test="email != null and email != ''">email=#{email},</if>
+            <if test="onduty != null ">onduty=#{onduty},</if>
+            <if test="authority != null">authority=#{authority},</if>
+        </trim>
+        WHERE no=#{no}
+    </update>
+
+    <update id="delete" parameterType="list">
+        UPDATE employee SET onduty=0
+        where id in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
+    </update>
+
+    <update id="updateByPhone" parameterType="Employee">
+        UPDATE employee
+        <trim prefix="set" suffixOverrides=",">
+            <if test="password != null and password != ''">password=#{password}</if>
+        </trim>
+        WHERE phone=#{phone}
+    </update>
+</mapper>

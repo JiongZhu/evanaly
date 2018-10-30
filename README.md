@@ -10,7 +10,7 @@
 
 <center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/index.jpg"/></center>
 
-<center>**图5-1 系统首页**</center>
+<p align = "center">图5-1 系统首页</p>
 
 - 左上角为本系统Logo，点击可以跳转到本系统的首页。
 - 首页可以进行界面的轮转依次选取不同的版块：开始抓取事件、开始分析事件、显示客流量影响、显示天气情况，点击进入后可以进行相关操作。
@@ -27,7 +27,7 @@
 
 <center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/login.jpg"/></center>
 
-<center>**图5-2 系统登录**</center>
+<p align = "center">图5-2 系统登录</p>
 
 - 系统登录支持账号密码登录和手机号快速登录
 - 账号密码登录需要输入正确的工号、密码和验证码，密码采用MD5加密
@@ -41,11 +41,11 @@
 
 <center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/sprider.jpg"/></center>
 
-<center>**图5-3 事件抓取规则**</center>
+<p align = "center">图5-3 事件抓取规则</p>
 
 <center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/spiderr.jpg"/></center>
 
-<center>**图5-4 事件抓取后分析**</center>
+<p align = "center">图5-4 事件抓取后分析</p>
 
 - 事件抓取规则：将事件类型、事件的举办城市、时间发生日期、事件的抓取来源进行自由组合，进行抓取
   - 事件类型：展会、演唱会、体育赛事、会议、地方性节假日(后两项将在下个版本中加入)，支持多选
@@ -62,11 +62,11 @@
 
 <center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/week.jpg"/></center>
 
-<center>**图5-5 未来一周事件分析**</center>
+<p align = "center">图5-5 未来一周事件分析</p>
 
 <center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/month.jpg"/></center>
 
-<center>**图5-6 未来一月事件分析**</center>
+<p align = "center">图5-6 未来一月事件分析</p>
 
 - 事件分析分为未来一周事件分析和未来一月事件分析
 - 事件分析的内容包含：事件类型分析、热门城市统计分析、事件的日期分布
@@ -78,11 +78,11 @@
 
 <center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/traffic.jpg"/></center>
 
-<center>**图5-7 事件影响人数预测**</center>
+<p align = "center">图5-7 事件影响人数预测</p>
 
 <center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/number.jpg"/></center>
 
-<center>**图5-8 事件影响人数分析**</center>
+<p align = "center">图5-8 事件影响人数分析</p>
 
 - 查询规则：根据航线出发地、目的地、出行日期进行自由组合查询
 - 事件对特定出行选择的具体客流量影响以表格的形式呈现，用户可以从表格中查看到具体事件的影响人数和影响人数总计，还可以通过点击“查看航班列表”查看当天从出发地到目的地的具体航班列表
@@ -94,7 +94,7 @@
 
 <center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/weather.jpg"/></center>
 
-<center>**图5-9 近五天天气情况**</center>
+<p align = "center">图5-9 近五天天气情况</p>
 
 - 对于已经开启定位的用户将会自动呈现当地天气情况，没有开启会默认呈现北京市的天气情况
 - 点击定位图标，待选城市按照字母表顺序排列，便于检索和勾选，选定城市后天气情况会自动呈现在下方
@@ -110,7 +110,7 @@
 
 <center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/routes_yj.jpg"/></center>
 
-<center>**图5-11 航线预警**</center>
+<p align = "center">图5-11 航线预警</p>
 
 - 航班预警图会自动切换最近一周内的预警信息，可以手动选择某一天或者关闭自动切换
 - 预警图右侧会有相应的图例，对应不同的人流量预警信息
@@ -122,7 +122,7 @@
 
 <center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/manageevent.jpg"/></center>
 
-<center>**图5-12 事件管理**</center>
+<p align = "center">图5-12 事件管理</p>
 
 - 默认全查，事件查询规则：将事件名称、事件的举办城市、时间发生日期、一年内频率、主办方级别、影响年龄段、是否有固定参与人群、影响社会群体、最大影响范围、事件类型、事件热度、事件历史悠久程度进行自由组合，进行查询
   - 事件名称为手动文本输入，支持模糊查询
@@ -140,7 +140,7 @@
 
 <center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/manageweather.jpg"/></center>
 
-<center>**图5-13 天气源管理**</center>
+<p align = "center">图5-13 天气源管理</p>
 
 - 默认全查，输入城市名，支持模糊查询，查询到的天气源以列表形式展现在页面中，支持查看详情
 - 可以新增天气源，包含城市名，两个天气源具体地址
@@ -153,7 +153,7 @@
 
 <center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/manageperson.jpg"/></center>
 
-<center>**图5-14 人员管理**</center>
+<p align = "center">图5-14 人员管理</p>
 
 - 默认全查，输入用户名，支持模糊查询，查询到的员工以列表形式展现在页面中，支持查看详情
 - 员工信息包含：工号、姓名、权限、电话、邮箱
@@ -167,7 +167,7 @@
 
 <center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/managecity.jpg"/></center>
 
-<center>**图5-15 城市管理**</center>
+<p align = "center">图5-15 城市管理</p>
 
 - 默认全查，输入城市名，支持模糊查询，查询到的城市以列表形式展现在页面中
 - 城市信息包含：城市名、正常人流量、紧张人流量、饱和人流量
@@ -181,7 +181,7 @@
 
 <center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/manageroute.jpg"/></center>
 
-<center>**图5-16 路线管理**</center>
+<p align = "center">图5-16 路线管理</p>
 
 - 默认全查，输入出发地、目的地，支持模糊查询，查询到的航线以列表形式展现在页面中
 - 航线信息包含：出发地、目的地、正常人流量、紧张人流量、饱和人流量
@@ -195,12 +195,12 @@
 
 <center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/info.jpg"/></center>
 
-<center>**图5-17 个人资料**</center>
+<p align = "center">图5-17 个人资料</p>
 
 - 点击右上角修改个人资料，可以编辑姓名、电话和邮箱
 
 <center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/changeps.jpg"/></center>
 
-<center>**图5-18 修改密码**</center>
+<p align = "center">图5-18 修改密码</p>
 
 - 输入正确的初始密码、新密码、确认密码后可以修改登录密码

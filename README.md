@@ -106,7 +106,7 @@
 
 <center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/city_yj.jpg"/></center>
 
-<center>**图5-10 城市预警**</center>
+<p align = "center">图5-10 城市预警</p>
 
 <center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/routes_yj.jpg"/></center>
 

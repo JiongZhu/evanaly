@@ -8,7 +8,7 @@
 
 ​	在浏览器地址栏键入系统地址，例如：http://58.193.0.117，进入系统首页，界面如下：
 
-<center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/index.jpg"/></center>
+![mark](http://cdn.zhuj.top/blog/20190222/r118EJ54WBIa.jpg?imageslim)
 
 <p align = "center">图5-1 系统首页</p>
 
@@ -25,7 +25,7 @@
 
 管理员点击首页右上角的“登录”按钮进入系统登录页。
 
-<center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/login.jpg"/></center>
+![mark](http://cdn.zhuj.top/blog/20190222/3dcckrfFw0PL.jpg?imageslim)
 
 <p align = "center">图5-2 系统登录</p>
 
@@ -39,11 +39,11 @@
 
 ​	点击首页轮转版块、首页导航栏或系统左侧导航栏的“事件抓取”进入事件抓取页面。
 
-<center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/sprider.jpg"/></center>
+![mark](http://cdn.zhuj.top/blog/20190222/0p0CI0jF7JwM.jpg?imageslim)
 
 <p align = "center">图5-3 事件抓取规则</p>
 
-<center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/spiderr.jpg"/></center>
+![mark](http://cdn.zhuj.top/blog/20190222/gb7W3rQ2DGLF.jpg?imageslim)
 
 <p align = "center">图5-4 事件抓取后分析</p>
 
@@ -60,11 +60,11 @@
 
 ​	点击首页轮转版块、首页导航栏或左侧导航栏的“事件分析”进入事件分析页面。
 
-<center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/week.jpg"/></center>
+![mark](http://cdn.zhuj.top/blog/20190222/Iqip33wPJnW6.jpg?imageslim)
 
 <p align = "center">图5-5 未来一周事件分析</p>
 
-<center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/month.jpg"/></center>
+![mark](http://cdn.zhuj.top/blog/20190222/oatlyeT62zM6.jpg?imageslim)
 
 <p align = "center">图5-6 未来一月事件分析</p>
 
@@ -76,11 +76,11 @@
 
 ​	点击首页轮转版块、首页导航栏或左侧导航栏的“客流量影响”进入客流量影响页面。
 
-<center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/traffic.jpg"/></center>
+![mark](http://cdn.zhuj.top/blog/20190222/pzYz1Ro9pamx.jpg?imageslim)
 
 <p align = "center">图5-7 事件影响人数预测</p>
 
-<center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/number.jpg"/></center>
+![mark](http://cdn.zhuj.top/blog/20190222/hF29j9PS5OlT.jpg?imageslim)
 
 <p align = "center">图5-8 事件影响人数分析</p>
 
@@ -92,7 +92,7 @@
 
 ​	点击首页轮转版块、首页导航栏或左侧导航栏的“天气情况”进入天气情况页面。
 
-<center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/weather.jpg"/></center>
+![mark](http://cdn.zhuj.top/blog/20190222/Bbid9cBYp62c.jpg?imageslim)
 
 <p align = "center">图5-9 近五天天气情况</p>
 
@@ -102,13 +102,13 @@
 
 ## 航班预警图
 
-​   点击首页轮转版块、首页导航栏或左侧导航栏的“航班预警图”进入航班预警图页面。
+   点击首页轮转版块、首页导航栏或左侧导航栏的“航班预警图”进入航班预警图页面。
 
-<center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/city_yj.jpg"/></center>
+![mark](http://cdn.zhuj.top/blog/20190222/HmXSVo65snNj.jpg?imageslim)
 
 <p align = "center">图5-10 城市预警</p>
 
-<center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/routes_yj.jpg"/></center>
+![mark](http://cdn.zhuj.top/blog/20190222/aN68VS30ObfH.jpg?imageslim)
 
 <p align = "center">图5-11 航线预警</p>
 
@@ -120,7 +120,7 @@
 
 ​	系统管理员通过点击首页导航栏或左侧导航栏的系统管理中的“事件管理”进入事件管理页面。
 
-<center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/manageevent.jpg"/></center>
+![mark](http://cdn.zhuj.top/blog/20190222/t7SiX14tYe3J.jpg?imageslim)
 
 <p align = "center">图5-12 事件管理</p>
 
@@ -138,7 +138,7 @@
 
 ​	系统管理员通过点击首页导航栏或左侧导航栏的系统管理中的“天气源管理”进入天气源管理页面。
 
-<center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/manageweather.jpg"/></center>
+![mark](http://cdn.zhuj.top/blog/20190222/0RP2mYRzLMny.jpg?imageslim)
 
 <p align = "center">图5-13 天气源管理</p>
 
@@ -151,7 +151,7 @@
 
 ​	系统管理员通过点击首页导航栏或左侧导航栏的系统管理中的“人员管理”进入人员管理页面。
 
-<center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/manageperson.jpg"/></center>
+![mark](http://cdn.zhuj.top/blog/20190222/7883w9evlXyU.jpg?imageslim)
 
 <p align = "center">图5-14 人员管理</p>
 
@@ -163,9 +163,9 @@
 
 ## 城市管理
 
-​   系统管理员通过点击首页导航栏或左侧导航栏的系统管理中的“城市管理”进入城市管理页面。
+   系统管理员通过点击首页导航栏或左侧导航栏的系统管理中的“城市管理”进入城市管理页面。
 
-<center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/managecity.jpg"/></center>
+![mark](http://cdn.zhuj.top/blog/20190222/wYty7SivCm5g.jpg?imageslim)
 
 <p align = "center">图5-15 城市管理</p>
 
@@ -177,9 +177,9 @@
 
 ## 路线管理
 
-​   系统管理员通过点击首页导航栏或左侧导航栏的系统管理中的“路线管理”进入路线管理页面。
+   系统管理员通过点击首页导航栏或左侧导航栏的系统管理中的“路线管理”进入路线管理页面。
 
-<center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/manageroute.jpg"/></center>
+![mark](http://cdn.zhuj.top/blog/20190222/boCF1mLV85u0.jpg?imageslim)
 
 <p align = "center">图5-16 路线管理</p>
 
@@ -193,13 +193,13 @@
 
 ​	成功登录系统后点击右上角用户名可以进入个人资料页。
 
-<center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/info.jpg"/></center>
+![mark](http://cdn.zhuj.top/blog/20190222/ND14OCE927Bg.jpg?imageslim)
 
 <p align = "center">图5-17 个人资料</p>
 
 - 点击右上角修改个人资料，可以编辑姓名、电话和邮箱
 
-<center><img src="http://otmfpj0s2.bkt.clouddn.com/imgs-update/changeps.jpg"/></center>
+![mark](http://cdn.zhuj.top/blog/20190222/9tXoLzipg7DP.jpg?imageslim)
 
 <p align = "center">图5-18 修改密码</p>
 
